@@ -1,0 +1,88 @@
+{
+    "info": {
+        "name": "detectron2-detect",
+        "version": "1.0.0",
+        "category": "detectron2",
+        "keywords": ["deep", "detectron2", "maskrcnn", "faster-rcnn"],
+        "homepage": "https://answer.bogonets.com/",
+        "bugs": "https://answer.bogonets.com/",
+        "license": "Bogonet License",
+        "author": "wooruang",
+        "dependencies": [
+            {"type": "pip", "src": "numpy"},
+            {"type": "pip", "src": "pytorch"},
+            {"type": "pip", "src": "cython"},
+            {"type": "pip", "src": "'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'"},
+            {"type": "pip", "src": "'git+https://github.com/facebookresearch/detectron2.git'"},
+            {"type": "pip", "src": "opencv-python"}
+        ],
+        "engines": ">=1.0.2",
+        "environment": {},
+        "titles": {
+            "en": "Detectron2 Detection",
+            "ko": "Detectron2 탐지"
+        },
+        "descriptions": {
+            "en": "Detection by Detectron2.",
+            "ko": "."
+        },
+        "documentation_mime": "text",
+        "documentations": {},
+        "meta": {}
+    },
+    "controls": {
+        "input": "image",
+        "output": "bboxes"
+    },
+    "props": [
+        {
+            "rule": "initialize_only",
+            "name": "weights",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "A File path of Weights",
+                "ko": "Weights 파일 경로"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        },
+        {
+            "rule": "initialize_only",
+            "name": "config_file",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "A File path of Config",
+                "ko": "Config 파일 경로"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "conf_threshold",
+            "default_value": "0.5",
+            "type": "float",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "Confidence threshold",
+                "ko": "Confidence 임계치"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        }
+
+    ]
+}
