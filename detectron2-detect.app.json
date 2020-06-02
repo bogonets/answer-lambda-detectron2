@@ -36,7 +36,7 @@
     },
     "props": [
         {
-            "rule": "initialize_only",
+            "rule": "read_and_write",
             "name": "weights",
             "default_value": "",
             "type": "str",
@@ -52,7 +52,7 @@
             }
         },
         {
-            "rule": "initialize_only",
+            "rule": "read_and_write",
             "name": "config_file",
             "default_value": "",
             "type": "str",

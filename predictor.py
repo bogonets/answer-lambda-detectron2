@@ -77,6 +77,9 @@ class VisualizationDemo(object):
             predictions (dict): the output of the model.
             vis_output (VisImage): the visualized image output.
         """
+        import sys
+        sys.stdout.write(f"shape~~~~ {image.shape}")
+        sys.stdout.flush()
         vis_output = None
         predictions = self.predictor(image)
         # Convert image from OpenCV BGR format to Matplotlib RGB format.
