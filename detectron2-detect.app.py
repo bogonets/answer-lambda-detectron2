@@ -19,8 +19,6 @@ cfg = None
 visualizer = None
 
 
-
-
 def setup_cfg():
     # load config from file and command-line arguments
     cfg = get_cfg()
@@ -65,14 +63,13 @@ def on_init():
 
 def on_run(image):
 
-
-    sys.stdout.write(f"111 shape~~~~ {image.shape}")
-    sys.stdout.flush()
+    #sys.stdout.write(f"111 shape~~~~ {image.shape}")
+    #sys.stdout.flush()
 
     instances = visualizer.predict_for_instances(image)
 
-    sys.stdout.write(f"{instances}")
-    sys.stdout.flush()
+    #sys.stdout.write(f"{instances}")
+    #sys.stdout.flush()
     
     boxes = instances.pred_boxes.tensor
     scores = instances.scores
@@ -83,8 +80,8 @@ def on_run(image):
     boxes = np.append(boxes, scores, axis=1)
     boxes = np.append(boxes, classes, axis=1)
 
-    sys.stdout.write(f"{boxes}")
-    sys.stdout.flush()
+    #sys.stdout.write(f"{boxes}")
+    #sys.stdout.flush()
 
     return {'bboxes': boxes}
 
