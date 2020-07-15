@@ -1,0 +1,81 @@
+{
+    "info": {
+        "name": "detectron2_filter_by_class",
+        "version": "1.0.0",
+        "category": "detectron2",
+        "keywords": ["deep", "detectron2", "maskrcnn", "faster-rcnn"],
+        "homepage": "https://answer.bogonets.com/",
+        "bugs": "https://answer.bogonets.com/",
+        "license": "Bogonet License",
+        "author": "wooruang",
+        "dependencies": [
+            {"type": "pip", "src": "numpy"},
+            {
+                "type": "pip", "src": "torch==1.5.0+cu101",
+                "extra": ["-f", "https://download.pytorch.org/whl/torch_stable.html"]
+            },
+            {
+                "type": "pip", "src": "torchvision==0.6.0+cu101",
+                "extra": ["-f", "https://download.pytorch.org/whl/torch_stable.html"]
+            },
+            {"type": "pip", "src": "cython"},
+            {"type": "pip", "src": "git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI"},
+            {"type": "pip", "src": "git+https://github.com/facebookresearch/detectron2.git"},
+            {"type": "pip", "src": "opencv-python"}
+        ],
+        "engines": ">=1.0.2",
+        "environment": {
+            "type": "pyenv",
+            "name": "detectron2"
+        },
+        "titles": {
+            "en": "Detectron2 filter",
+            "ko": "Detectron2 필터"
+        },
+        "descriptions": {
+            "en": "Filter objects by class.",
+            "ko": "클래스로 필터링 한다."
+        },
+        "documentation_mime": "text",
+        "documentations": {},
+        "meta": {}
+    },
+    "controls": {
+        "input": "bboxes",
+        "output": ["filtered_bboxes", "remain"]
+    },
+    "props": [
+        {
+            "rule": "read_and_write",
+            "name": "classes",
+            "default_value": "",
+            "type": "list",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "Filter condition",
+                "ko": "필터 조건"
+            },
+            "help": {
+                "en": "Select the desired object.",
+                "ko": "원하는 객체를 선택한다."
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "names_file",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "A File path of names_file ",
+                "ko": "names 파일 "
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        }
+    ]
+}
