@@ -3,7 +3,7 @@ import numpy as np
 
 classes = []
 names_file = 'coco.names'
-names = []
+names = {}
 
 
 def read_class_names(class_file_names):
@@ -21,6 +21,7 @@ def on_set(key, val):
     elif key == 'names_file':
         global names_file
         global names
+        names_file = val
         names = read_class_names(names_file)
 
 
@@ -32,6 +33,15 @@ def on_get(key):
 
 
 def on_run(bboxes):
+    # sys.stdout.write(f"[detectron2_filter] bboxes {bboxes} {type(bboxes)}\n")
+    # sys.stdout.write(f"[detectron2_filter] bboxes.shape {bboxes.shape} {type(bboxes.shape)}\n")
+    # sys.stdout.write(f"[detectron2_filter] bboxes.size {bboxes.size} {type(bboxes.size)}\n")
+    # sys.stdout.flush()
+    if not bboxes.shape or bboxes.size == 0:
+        return {
+            'filtered_bboxes': None,
+            'remain': None
+        }
     filtered_bboxes = []
     remain = []
     for b in bboxes:
