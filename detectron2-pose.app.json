@@ -1,9 +1,9 @@
 {
     "info": {
-        "name": "detectron2-detect",
+        "name": "detectron2-pose",
         "version": "1.0.0",
         "category": "detectron2",
-        "keywords": ["deep", "detectron2", "maskrcnn", "faster-rcnn"],
+        "keywords": ["deep", "detectron2", "maskrcnn", "faster-rcnn", "pose"],
         "homepage": "https://answer.bogonets.com/",
         "bugs": "https://answer.bogonets.com/",
         "license": "Bogonet License",
@@ -29,11 +29,11 @@
             "name": "detectron2"
         },
         "titles": {
-            "en": "Detectron2 Detection",
-            "ko": "Detectron2 탐지"
+            "en": "Detectron2 Pose estimation",
+            "ko": "Detectron2 포즈 판단"
         },
         "descriptions": {
-            "en": "Detection by Detectron2.",
+            "en": "Pose estimation by Detectron2.",
             "ko": "."
         },
         "documentation_mime": "text",
@@ -42,7 +42,7 @@
     },
     "controls": {
         "input": "image",
-        "output": "bboxes"
+        "output": ["draw_image", "keypoints"]
     },
     "props": [
         {

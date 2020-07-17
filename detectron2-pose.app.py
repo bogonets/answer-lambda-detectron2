@@ -4,6 +4,7 @@ import sys
 import os
 
 from detectron2.config import get_cfg
+from detectron2.utils import visualizer as vis
 from predictor import VisualizationDemo
 
 weights_file = ''
@@ -11,6 +12,8 @@ config_file = ''
 conf_threshold = 0.5
 cfg = None
 visualizer = None
+enable_bboxes = True
+enable_predictions = True
 
 
 def setup_cfg():
@@ -58,27 +61,21 @@ def on_init():
 
 def on_run(image):
 
-    #sys.stdout.write(f"111 shape~~~~ {image.shape}")
-    #sys.stdout.flush()
+    # sys.stdout.write(f"111 shape~~~~ {image.shape}")
+    # sys.stdout.flush()
 
-    predictions = visualizer.predictor(image)
+    predictions, draw_image = visualizer.run_on_image(image)
+    draw_image = draw_image.get_image()[:, :, ::-1]
 
-    #sys.stdout.write(f"{instances}")
-    #sys.stdout.flush()
+    # sys.stdout.write(f"[detectron2-pose] predictions {predictions}")
+    # sys.stdout.flush()
 
-    instances = predictions["instances"].to(visualizer.cpu_device)
+    instances = predictions['instances'].to(visualizer.cpu_device)
+    keypoints = instances.pred_keypoints.numpy()
 
-    boxes = instances.pred_boxes.tensor
-    scores = instances.scores
-    classes = instances.pred_classes
+    # sys.stdout.write(f"[detectron2-pose] keypoints {keypoints}")
+    # sys.stdout.flush()
 
-    scores = scores.reshape(-1,1)
-    classes = classes.reshape(-1,1)
-    boxes = np.append(boxes, scores, axis=1)
-    boxes = np.append(boxes, classes, axis=1)
+    return {'draw_image': draw_image, 'keypoints': keypoints}
 
-    #sys.stdout.write(f"{boxes}")
-    #sys.stdout.flush()
-
-    return {'bboxes': boxes}
 

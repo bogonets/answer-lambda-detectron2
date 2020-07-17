@@ -10,7 +10,7 @@ from detectron2.data import MetadataCatalog
 from detectron2.engine.defaults import DefaultPredictor
 from detectron2.utils.video_visualizer import VideoVisualizer
 from detectron2.utils.visualizer import ColorMode
-from visualizer import Visualizer
+from detectron2.utils.visualizer import Visualizer
 
 
 class VisualizationDemo(object):
@@ -66,29 +66,6 @@ class VisualizationDemo(object):
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
         return predictions, vis_output
-
-    def predict_for_instances(self, image):
-        """
-        Args:
-            image (np.ndarray): an image of shape (H, W, C) (in BGR order).
-                This is the format used by OpenCV.
-
-        Returns:
-            predictions (dict): the output of the model.
-            vis_output (VisImage): the visualized image output.
-        """
-        import sys
-        sys.stdout.write(f"shape~~~~ {image.shape}")
-        sys.stdout.flush()
-        vis_output = None
-        predictions = self.predictor(image)
-        # Convert image from OpenCV BGR format to Matplotlib RGB format.
-        image = image[:, :, ::-1]
-        visualizer = Visualizer(image, self.metadata, instance_mode=self.instance_mode)
-
-        instances = predictions["instances"].to(self.cpu_device)
-
-        return instances
 
     def _frame_from_video(self, video):
         while video.isOpened():
