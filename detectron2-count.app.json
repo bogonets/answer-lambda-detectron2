@@ -1,0 +1,51 @@
+{
+    "info": {
+        "name": "detectron2-count",
+        "version": "1.0.0",
+        "category": "detectron2",
+        "keywords": ["object", "count"],
+        "homepage": "https://answer.bogonets.com/",
+        "bugs": "https://answer.bogonets.com/",
+        "license": "Bogonet License",
+        "author": "wooruang",
+        "dependencies": [],
+        "engines": ">=1.0.2",
+        "environment": {
+            "type": "pyenv",
+            "name": "detectron2"
+        },
+        "titles": {
+            "en": "Detectron2 Count",
+            "ko": "Detectron2 계수"
+        },
+        "descriptions": {
+            "en": "Count.",
+            "ko": "."
+        },
+        "documentation_mime": "text",
+        "documentations": {},
+        "meta": {}
+    },
+    "controls": {
+        "input": "bboxes",
+        "output": "count"
+    },
+    "props": [
+        {
+            "rule": "read_and_write",
+            "name": "min_count",
+            "default_value": "0",
+            "type": "int",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "Minimum count",
+                "ko": "최소 계수"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        }
+    ]
+}
