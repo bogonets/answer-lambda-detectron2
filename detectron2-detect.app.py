@@ -2,15 +2,19 @@ import numpy as np
 
 import sys
 import os
+import time
 
 from detectron2.config import get_cfg
 from predictor import VisualizationDemo
+import torch
 
 weights_file = ''
 config_file = ''
 conf_threshold = 0.5
 cfg = None
 visualizer = None
+
+gpu = 0
 
 
 def setup_cfg():
@@ -37,6 +41,9 @@ def on_set(k, v):
     elif k == 'conf_threshold':
         global conf_threshold
         conf_threshold = float(v)
+    elif k == 'gpu':
+        global gpu
+        gpu = int(v)
 
 
 def on_get(k):
@@ -46,10 +53,62 @@ def on_get(k):
         return config_file
     elif k == 'conf_threshold':
         return conf_threshold
+    elif k == 'gpu':
+        return gpu
+
+
+def print_gpu_info(select, count, current):
+    sys.stdout.write("----------------------------\n")
+    sys.stdout.write(f"GPU{select} / {count} - {current} / {torch.cuda.get_device_name(current)}\n")
+    sys.stdout.write(f"GPU name 0 - {torch.cuda.get_device_name(0)}\n")
+    sys.stdout.write(f"GPU name 1 - {torch.cuda.get_device_name(1)}\n")
+    sys.stdout.write(f"GPU name 2 - {torch.cuda.get_device_name(2)}\n")
+    sys.stdout.write("----------------------------\n")
+    sys.stdout.flush()
+
+
+def set_gpu():
+    if not torch.cuda.is_available():
+        sys.stderr.write(f"[detectron2-detect.on_init] Pytorch Cuda is not available!.")
+        sys.stderr.flush()
+        return True
+
+    device_count = torch.cuda.device_count()
+    device_index = torch.cuda.current_device()
+
+    if device_count <= gpu:
+        sys.stderr.write(f"[detectron2-detect.on_init] Gpu's index is not available. (all gpus: {device_count}, select gpu: {gpu})")
+        sys.stderr.flush()
+        return True
+
+    # Set GPU.
+    torch.cuda.set_device(gpu)
+
+    is_set = False
+    for i in range(10):
+        device_count = torch.cuda.device_count()
+        device_index = torch.cuda.current_device()
+        # print_gpu_info(gpu, device_count, device_index)
+        if gpu == device_index:
+            is_set = True
+            time.sleep(2)
+            device_index = torch.cuda.current_device()
+            sys.stdout.write("----------------------------\n")
+            sys.stdout.write(f"GPU SELECTED! - {gpu} == {device_index}\n")
+            sys.stdout.write("----------------------------\n")
+            sys.stdout.flush()
+            break
+        torch.cuda.set_device(gpu)
+
+    return is_set
 
 
 def on_init():
     global visualizer
+
+    if not set_gpu():
+        return False
+
     cfg = setup_cfg()
 
     visualizer = VisualizationDemo(cfg)
@@ -81,4 +140,5 @@ def on_run(image):
     #sys.stdout.flush()
 
     return {'bboxes': boxes}
+
 

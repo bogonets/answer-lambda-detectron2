@@ -92,6 +92,22 @@
                 "en": "",
                 "ko": ""
             }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "gpu",
+            "default_value": "0",
+            "type": "int",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "GPU Index",
+                "ko": "GPU 인덱스"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
         }
     ]
 }
