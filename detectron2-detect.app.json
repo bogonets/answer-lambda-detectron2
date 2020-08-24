@@ -42,7 +42,7 @@
     },
     "controls": {
         "input": "image",
-        "output": "bboxes"
+        "output": ["draw_image", "boxes"]
     },
     "props": [
         {
@@ -103,6 +103,54 @@
             "title": {
                 "en": "GPU Index",
                 "ko": "GPU 인덱스"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "enable_draw_image",
+            "default_value": "False",
+            "type": "bool",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "Enable draw image",
+                "ko": "draw image 사용"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "thing_classes",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "Thing classes file",
+                "ko": "Thing classes 파일"
+            },
+            "help": {
+                "en": "",
+                "ko": ""
+            }
+        },
+        {
+            "rule": "read_and_write",
+            "name": "thing_color",
+            "default_value": "",
+            "type": "str",
+            "required": true,
+            "valid": {},
+            "title": {
+                "en": "Thing color file",
+                "ko": "Thing color 파일"
             },
             "help": {
                 "en": "",

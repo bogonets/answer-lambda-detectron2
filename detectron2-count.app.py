@@ -24,11 +24,21 @@ def on_init():
 
 def on_run(bboxes):
 
+    # sys.stderr.write(f"[detectron2-count.on_run] start1\n")
+    # sys.stderr.flush()
+
     if not bboxes.shape:
-        return {}
+        return {'count': None}
 
-    if bboxes.shape[0] <= min_count:
-        return {}
+    # sys.stderr.write(f"[detectron2-count.on_run] start2\n")
+    # sys.stderr.flush()
 
-    return {'count': np.array([bboxes.shape[0]])}
+    if bboxes.shape[0] < min_count:
+        return {'count': None}
+
+    # sys.stderr.write(f"[detectron2-count.on_run] start3\n")
+    # sys.stderr.flush()
+
+
+    return {'count': str(bboxes.shape[0])}
 
