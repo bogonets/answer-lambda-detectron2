@@ -72,10 +72,22 @@ def on_run(image):
 
     instances = predictions['instances'].to(visualizer.cpu_device)
     keypoints = instances.pred_keypoints.numpy()
+    
+    boxes = instances.pred_boxes.tensor
+    scores = instances.scores
+    classes = instances.pred_classes
+
+    # sys.stderr.write(f"[detectron2-detect.on_run] classes : {classes}\n")
+    # sys.stderr.flush()
+    scores = scores.reshape(-1,1)
+    classes = classes.reshape(-1,1)
+    boxes = np.append(boxes, scores, axis=1)
+    boxes = np.append(boxes, classes, axis=1)
+
 
     # sys.stdout.write(f"[detectron2-pose] keypoints {keypoints}")
     # sys.stdout.flush()
 
-    return {'draw_image': draw_image, 'keypoints': keypoints}
+    return {'draw_image': draw_image, 'keypoints': keypoints, 'boxes': boxes}
 
 
