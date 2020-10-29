@@ -42,7 +42,7 @@
     },
     "controls": {
         "input": "image",
-        "output": ["draw_image", "keypoints"]
+        "output": ["draw_image", "keypoints", "boxes"]
     },
     "props": [
         {
