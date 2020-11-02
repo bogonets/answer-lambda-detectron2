@@ -89,7 +89,17 @@ def draw_instance_predictions(vis, predictions):
         # else:
         #     colors = None
         #     alpha = 0.5
-        colors = [ thing_colors_values[x] / 255 for x in classes ]
+        # sys.stderr.write(f"[detectron2-detect.draw_instance_predictions] thing_colors_values : {thing_colors_values}\n")
+        # sys.stderr.flush()
+        if thing_colors_values:
+            colors = []
+            for x in classes:
+                c = []
+                for i in thing_colors_values[x]:
+                    c.append(float(i) / 255.0)
+                colors.append(c)
+        else:
+            colors = None
         #    [x / 255 for x in thing_colors_values[c]] for c in classes
         #]
         alpha = 0.5
@@ -134,7 +144,7 @@ def on_set(k, v):
     elif k == 'thing_classes':
         global thing_classes
         thing_classes = v
-    elif k == 'thing_colors':
+    elif k == 'thing_color':
         global thing_colors
         thing_colors = v
 
@@ -152,7 +162,7 @@ def on_get(k):
         return str(enable_draw_image)
     elif k == 'thing_classes':
         return thing_classes
-    elif k == 'thing_colors':
+    elif k == 'thing_color':
         return thing_colors
 
 
@@ -204,6 +214,8 @@ def set_gpu():
 
 def on_init():
     global visualizer
+    global thing_classes_values
+    global thing_colors_values
 
     if not set_gpu():
         return False
