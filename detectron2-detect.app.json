@@ -11,16 +11,16 @@
         "dependencies": [
             {"type": "pip", "src": "numpy"},
             {
-                "type": "pip", "src": "torch==1.6.0+cu101",
+                "type": "pip", "src": "torch==1.5.0+cu101",
                 "extra": ["-f", "https://download.pytorch.org/whl/torch_stable.html"]
             },
             {
-                "type": "pip", "src": "torchvision==0.7.0+cu101",
+                "type": "pip", "src": "torchvision==0.6.0+cu101",
                 "extra": ["-f", "https://download.pytorch.org/whl/torch_stable.html"]
             },
             {"type": "pip", "src": "cython"},
             {"type": "pip", "src": "git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI"},
-            {"type": "pip", "src": "git+https://github.com/facebookresearch/detectron2.git"},
+            {"type": "pip", "src": "git+https://github.com/facebookresearch/detectron2.git@v0.3"},
             {"type": "pip", "src": "opencv-python"}
         ],
         "engines": ">=1.0.2",
